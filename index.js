@@ -19,4 +19,13 @@ if (type === 'read') {
       process.exit(1);
     }
   });
+}else if (type === 'delete'){
+let i = newNote;
+delete json.notes[i];
+  fs.writeFile('data.json', JSON.stringify(json, null, 2), 'utf8', err => {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+});
 }

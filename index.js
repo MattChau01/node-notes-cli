@@ -12,7 +12,6 @@ fs.readFile('data.json', 'utf8', (err, data) => {
   let notes = JSON.parse(data);
   const string = JSON.stringify(notes.notes);
 
-
   if (type === 'read') {
     const index = Object.keys(notes.notes);
     const value = Object.values(notes.notes);
@@ -24,8 +23,11 @@ fs.readFile('data.json', 'utf8', (err, data) => {
       if(err) {
         console.error(err);
         process.exit(1);
-      }
+      }else {
+      console.log(JSON.stringify(newNote, null, 2))
+      // console.log(value.push(newNote));
       notes.nextId++;
+      }
     });
   }
 })

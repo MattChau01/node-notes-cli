@@ -11,7 +11,15 @@ fs.readFile('data.json', 'utf8', (err, data) => {
   }
   let notes = JSON.parse(data);
   const string = JSON.stringify(notes.notes);
-
+  const index = Object.keys(notes.notes);
+  const value = Object.values(notes.notes);
+  console.log(index);
+  index.push(JSON.stringify(notes.nextId));
+  console.log(index);
+  const number = notes.nextId;
+  const object = {number: 'test'};
+  console.log(object);
+  // console.log(string.push(object));
   if (type === 'read') {
     const index = Object.keys(notes.notes);
     const value = Object.values(notes.notes);
@@ -19,14 +27,19 @@ fs.readFile('data.json', 'utf8', (err, data) => {
       console.log(`${index[i]}: ${value[i]}`);
     }
   } else if (type === 'create') {
-    fs.writeFile('data.json', newNote + '\n', 'utf8', (err, data) =>{
+    index.push(notes.nextId);
+    value.push(newNote);
+    fs.writeFile('data.json', JSON.stringify(newNote) + '\n', 'utf8', (err, data) =>{
       if(err) {
         console.error(err);
         process.exit(1);
       }else {
-      console.log(JSON.stringify(newNote, null, 2))
-      // console.log(value.push(newNote));
-      notes.nextId++;
+
+
+        // console.log(JSON.stringify(newNote, null, 2))
+        // console.log(value.push(newNote));
+        notes.nextId++;
+
       }
     });
   }
